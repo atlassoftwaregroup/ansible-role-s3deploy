@@ -43,8 +43,3 @@
   file: >
     path={{ deploy_path }}
     mode=755
-- name: hipchat alert
-  hipchat: >
-    token={{ hipchat_token }}
-    room={{ hipchat_room }}
-    msg="{{ hipchat_msg }}"
