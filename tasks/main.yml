@@ -1,0 +1,50 @@
+---
+- name: Create App Dirs
+  file: >
+    path={{ deploy_path }}
+    owner={{ owner }}
+    group={{ group }}
+    mode=755
+    state=directory
+- name: Create tmp dir for app
+  file:
+    path: "{{ deploy_tmp }}"
+    recurse: yes
+    state: directory
+- name: Ensure tmp dirs are empty before deploying
+  file: >
+    path={{ deploy_tmp }}/*
+    state=absent
+- name: Download Source Code and rename tgz file to appname.tgz
+  s3: >
+    aws_access_key={{ aws.atlas_access_key }}
+    aws_secret_key={{ aws.atlas_secret_key }}
+    bucket={{ bucket_name }}
+    object={{ deploy_object }}
+    dest={{ deploy_tmp }}/{{ deploy_object }}
+    mode=get
+- name: Untar tgz
+  unarchive: >
+    src={{ deploy_tmp }}/{{ deploy_object }}
+    dest={{ deploy_tmp }}
+    copy=no
+- name: set permissions for untarred file
+  file: >
+    path={{ deploy_tmp }}
+    recurse=yes
+    owner={{ owner }}
+    group={{ group }}
+- name: delete tgz file
+  file: >
+    path={{ deploy_tmp }}/{{ deploy_object }}
+    state=absent
+- command: rsync -azr --delete {{ deploy_tmp }} {{ deploy_dir }}
+- name: set permissions for app dirs
+  file: >
+    path={{ deploy_path }}
+    mode=755
+- name: hipchat alert
+  hipchat: >
+    token={{ hipchat_token }}
+    room={{ hipchat_room }}
+    msg="{{ hipchat_msg }}"

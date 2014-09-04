@@ -1,0 +1,15 @@
+---
+owner: ubuntu
+group: ubuntu
+
+client_access_key: "redacted"
+client_secret_key: "redacted"
+bucket_name: "redacted"
+
+# app is set through -e "app=appname"
+deploy_dir: /opt/apps/
+deploy_key: 1234
+deploy_object: "{{ app }}.tgz"
+deploy_tmp: "/tmp/{{ app }}"
+deploy_dest: "{{ deploy_dir }}/{{ app }}/{{ app }}.tgz"
+deploy_path: "{{ deploy_dir }}/{{ app }}"

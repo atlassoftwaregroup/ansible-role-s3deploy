@@ -1,0 +1,12 @@
+---
+galaxy_info:
+  author: "Jonathan Nakatsui"
+  license: MIT
+  min_ansible_version: 1.6
+  platforms:
+    - name: Ubuntu
+      versions:
+        - Precise
+  categories:
+    - web
+dependencies: []
