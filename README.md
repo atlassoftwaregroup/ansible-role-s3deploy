@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/jnakatsui/ansible-role-s3deploy.svg)](https://travis-ci.org/jnakatsui/ansible-role-s3deploy)
 
+Assumes that tar command is run inside directory
+
 Set app though --extra-vars or -e when calling playbook
 Always creates /opt/apps/{{ app }}
 

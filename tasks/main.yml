@@ -13,7 +13,7 @@
     state: directory
 - name: Ensure tmp dirs are empty before deploying
   file: >
-    path={{ deploy_tmp }}/*
+    path={{ deploy_tmp }}/
     state=absent
 - name: Download Source Code and rename tgz file to appname.tgz
   s3: >
