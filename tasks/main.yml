@@ -1,45 +1,46 @@
 ---
 - name: Create App Dirs
-  file: >
-    path={{ deploy_path }}
-    owner={{ owner }}
-    group={{ group }}
-    mode=755
-    state=directory
+  file:
+    path: "{{ deploy_path }}"
+    owner: "{{ owner }}"
+    group: "{{ group }}"
+    mode: "755"
+    state: "directory"
 - name: Ensure tmp dirs are empty before deploying
-  file: >
-    path={{ deploy_tmp }}/
-    state=absent
+  file:
+    path: "{{ deploy_tmp }}/"
+    state: "absent"
 - name: Create tmp dir for app
   file:
     path: "{{ deploy_tmp }}"
     recurse: yes
     state: directory
 - name: Download Source Code and rename tgz file to appname.tgz
-  s3: >
-    aws_access_key={{ atlas_access_key }}
-    aws_secret_key={{ atlas_secret_key }}
-    bucket={{ bucket_name }}
-    object={{ deploy_key }}
-    dest={{ deploy_tmp }}/{{ deploy_object }}
-    mode=get
+  s3:
+    aws_access_key: "{{ atlas_access_key }}"
+    aws_secret_key: "{{ atlas_secret_key }}"
+    bucket: "{{ bucket_name }}"
+    object: "{{ deploy_key }}"
+    dest: "{{ deploy_tmp }}/{{ deploy_object }}"
+    mode: "get"
 - name: Untar tgz
-  unarchive: >
-    src={{ deploy_tmp }}/{{ deploy_object }}
-    dest={{ deploy_tmp }}
-    copy=no
+  unarchive:
+    src: "{{ deploy_tmp }}/{{ deploy_object }}"
+    dest: "{{ deploy_tmp }}"
+    copy: "no"
 - name: set permissions for untarred file
-  file: >
-    path={{ deploy_tmp }}
-    recurse=yes
-    owner={{ owner }}
-    group={{ group }}
+  file:
+    path: "{{ deploy_tmp }}"
+    recurse: "yes"
+    owner: "{{ owner }}"
+    group: "{{ group }}"
 - name: delete tgz file
-  file: >
-    path={{ deploy_tmp }}/{{ deploy_object }}
-    state=absent
-- command: rsync -azr --delete {{ deploy_tmp }} {{ deploy_dir }}
+  file:
+    path: "{{ deploy_tmp }}/{{ deploy_object }}"
+    state: "absent"
+- name: rsync files from tmp dir 
+  command: rsync -azr --delete {{ deploy_tmp }} {{ deploy_dir }}
 - name: set permissions for app dirs
-  file: >
-    path={{ deploy_path }}
-    mode=755
+  file:
+    path: "{{ deploy_path }}"
+    mode: "755"
