@@ -17,8 +17,8 @@
     state: directory
 - name: Download Source Code and rename tgz file to appname.tgz
   s3:
-    aws_access_key: "{{ atlas_access_key }}"
-    aws_secret_key: "{{ atlas_secret_key }}"
+    # aws_access_key: "{{ atlas_access_key }}"
+    # aws_secret_key: "{{ atlas_secret_key }}"
     bucket: "{{ bucket_name }}"
     object: "{{ deploy_key }}"
     dest: "{{ deploy_tmp }}/{{ deploy_object }}"
