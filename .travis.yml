@@ -9,14 +9,14 @@ install:
   # Install Ansible.
   - pip install ansible
   # Add ansible.cfg to pick up roles path.
-  - "printf '[defaults]\nroles_path = ../' > ansible.cfg"
+  # - "printf '[defaults]\nroles_path = ../' > ansible.cfg"
   # Install required dependencies.
   - ansible-galaxy install jnakatsui.s3deploy
 script:
   # Check the role/playbook's syntax.
   - "ansible-playbook -i tests/inventory tests/$SITE --syntax-check"
 #   # Run the role/playbook with ansible-playbook.
-#   - "ansible-playbook -i tests/inventory tests/$SITE --connection=local --sudo"
+  - "ansible-playbook -i tests/inventory tests/$SITE --connection=local --sudo"
 #   # Run the role/playbook again, checking to make sure it's idempotent.
 #   - >
 #     ansible-playbook -i tests/inventory tests/$SITE --connection=local --sudo
