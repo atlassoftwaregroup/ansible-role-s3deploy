@@ -12,6 +12,7 @@ bucket_name: "redacted"
 
 # app is set through -e "app=appname"
 deploy_dir: /opt/apps/
+deploy_key: "redacted"
 deploy_object: "{{ app }}.tgz"
 deploy_tmp: "/tmp/{{ app }}"
 deploy_path: "{{ deploy_dir }}/{{ app }}"
