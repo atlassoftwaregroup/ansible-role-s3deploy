@@ -23,7 +23,7 @@
     object: "{{ deploy_key }}"
     dest: "{{ deploy_tmp }}/{{ deploy_object }}"
     mode: "get"
-    when: not s3deploy-iam
+  when: deploy_access_key is defined
 - name: Download Source Code and rename tgz file to appname.tgz
   s3:
     bucket: "{{ bucket_name }}"
@@ -31,6 +31,7 @@
     dest: "{{ deploy_tmp }}/{{ deploy_object }}"
     mode: "get"
     when: s3deploy-iam
+  when: deploy_access_key is undefined
 - name: Untar tgz
   unarchive:
     src: "{{ deploy_tmp }}/{{ deploy_object }}"

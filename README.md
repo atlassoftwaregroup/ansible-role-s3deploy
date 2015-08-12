@@ -10,8 +10,6 @@ None
 Role Variables
 --------------
 
-s3deploy-iam: If true does not look for aws access credentials. If false does look for aws access credentials
-
 Dependencies
 ------------
 - jnakatsui.s3cmd

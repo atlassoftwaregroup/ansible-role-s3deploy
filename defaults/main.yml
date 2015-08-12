@@ -2,8 +2,6 @@
 owner: ubuntu
 group: ubuntu
 
-s3deploy-iam: false
-
 # aws s3 account to deploy from
 deploy_access_key: "redacted"
 deploy_secret_key: "redacted"
