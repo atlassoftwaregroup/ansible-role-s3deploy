@@ -3,11 +3,9 @@ owner: ubuntu
 group: ubuntu
 
 # aws s3 account to deploy from
-deploy_access_key: "redacted"
-deploy_secret_key: "redacted"
+# deploy_access_key: "redacted"
+# deploy_secret_key: "redacted"
 # aws s3 account to deploy to
-client_access_key: "redacted"
-client_secret_key: "redacted"
 bucket_name: "redacted"
 
 # app is set through -e "app=appname"

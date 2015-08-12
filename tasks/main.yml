@@ -30,7 +30,6 @@
     object: "{{ deploy_key }}"
     dest: "{{ deploy_tmp }}/{{ deploy_object }}"
     mode: "get"
-    when: s3deploy-iam
   when: deploy_access_key is undefined
 - name: Untar tgz
   unarchive:
