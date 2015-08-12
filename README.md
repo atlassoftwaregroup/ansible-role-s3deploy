@@ -10,6 +10,8 @@ None
 Role Variables
 --------------
 
+If deploy_access_key is undefined then IAM roles will be used.
+
 Dependencies
 ------------
 - jnakatsui.s3cmd
