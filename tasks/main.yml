@@ -40,7 +40,7 @@
     src: "{{ deploy_tmp }}/{{ deploy_object }}"
     dest: "{{ deploy_tmp }}"
     copy: "no"
-  when: not tarball.exists
+  when: not tarball.stat.exists
 - name: set permissions for untarred file
   file:
     path: "{{ deploy_tmp }}"
