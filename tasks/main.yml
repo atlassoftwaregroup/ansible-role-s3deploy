@@ -31,26 +31,17 @@
     dest: "{{ deploy_tmp }}/{{ deploy_object }}"
     mode: "get"
   when: deploy_access_key is undefined
-- name: check that file exists
-  stat:
-    path: "{{ deploy_tmp }}/{{ deploy_object }}"
-  register: tarball
 - name: Untar tgz
   unarchive:
     src: "{{ deploy_tmp }}/{{ deploy_object }}"
     dest: "{{ deploy_tmp }}"
     copy: "no"
-  when: not tarball.stat.exists
 - name: set permissions for untarred file
   file:
     path: "{{ deploy_tmp }}"
     recurse: "yes"
     owner: "{{ owner }}"
     group: "{{ group }}"
-- name: delete tgz file
-  file:
-    path: "{{ deploy_tmp }}/{{ deploy_object }}"
-    state: "absent"
 - name: rsync files from tmp dir 
   command: rsync -azr --delete {{ deploy_tmp }} {{ deploy_dir }}
 - name: set permissions for app dirs
